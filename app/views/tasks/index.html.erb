@@ -1,0 +1,35 @@
+<div class="todos">
+  <header>
+    <h1>todos</h1>
+  </header>
+
+  <section class="main">
+    <input autofocus="true" class="new-todo" placeholder="What needs to be done?">
+    <input type="checkbox" class="toggle-all">
+
+    <ul class="todo-list">
+      <% @tasks.each do |task|%>
+        <li class="todo">
+          <div class="view">
+            <input type="checkbox" class="toggle">
+            <label><%= task.content %></label>
+          </div>
+
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <span class="todo-count">
+      <strong><%= @tasks.count %></strong>
+      items left
+    </span>
+
+    <ul class="filters">
+      <li><a href="#all">All</a></li>
+      <li><a href="#active">Active</a></li>
+      <li><a href="#completed">Completed</a></li>
+    </ul>
+  </footer>
+</div>
