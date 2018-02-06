@@ -8,7 +8,10 @@
     <input type="checkbox" class="toggle-all">
 
     <ul class="todo-list">
-      <task-item v-for="(task, index) in tasks" :task="task" :key="task.id" @delete="deleteTask($event, index)"></task-item>
+      <task-item v-for="(task, index) in tasks" :task="task" :key="task.id"
+        @delete="deleteTask($event, index)"
+        @update="updateTask($event, index)">
+      </task-item>
     </ul>
   </section>
 
@@ -29,7 +32,7 @@
   <div>
     <li class="task">
       <div class="view">
-        <input type="checkbox" class="toggle">
+         <input class="toggle" type="checkbox" v-model="task.completed" @change="updateTask">
         <label>{{ task.content }}</label>
         <button class="destroy" @click="removeTask"></button>
       </div>
