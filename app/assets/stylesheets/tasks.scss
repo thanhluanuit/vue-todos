@@ -131,11 +131,13 @@
     margin: auto 0;
     font-size: 30px;
     color: #cc9a9a;
+    border: 0;
     margin-bottom: 11px;
     transition: color 0.2s ease-out;
 
     &:hover {
       color: #af5b5e;
+      cursor: pointer;
     }
     &:after {
       content: '×';
