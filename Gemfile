@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0'
+gem 'sprockets-es6', '~> 0.9.2'
+gem 'vuejs-rails', '~> 2.4.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

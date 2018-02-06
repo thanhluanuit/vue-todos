@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  protect_from_forgery with: :null_session
+
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
