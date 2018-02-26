@@ -21,9 +21,9 @@
       items left
     </span>
     <ul class="filters">
-      <li><a href="#all">All</a></li>
-      <li><a href="#active">Active</a></li>
-      <li><a href="#completed">Completed</a></li>
+      <li><a href="#all" @click="all" :class="{ selected: currentFilter == 'all' }">All</a></li>
+      <li><a href="#active" @click="activeTasks" :class="{ selected: currentFilter == 'active' }">Active</a></li>
+      <li><a href="#completed" @click="completedTasks" :class="{ selected: currentFilter == 'completed' }">Completed</a></li>
     </ul>
   </footer>
 </div>
@@ -32,8 +32,8 @@
   <div>
     <li class="task">
       <div class="view">
-         <input class="toggle" type="checkbox" v-model="task.completed" @change="updateTask">
-        <label>{{ task.content }}</label>
+        <input class="toggle" type="checkbox" v-model="task.completed" @change="updateTask">
+        <label><input type="text" v-model="task.content"></label>
         <button class="destroy" @click="removeTask"></button>
       </div>
     </li>

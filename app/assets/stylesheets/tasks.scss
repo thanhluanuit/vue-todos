@@ -104,6 +104,12 @@
     }
   }
 
+  .todo-list li input {
+    border: 0;
+    color: #4d4d4d;
+    font-weight: 300;
+  }
+
   .todo-list li label {
     margin-bottom: 0;
     white-space: pre-line;

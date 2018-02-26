@@ -18,10 +18,12 @@ class Tasks {
       el: '#todos-app',
       data: function(){
         return {
+          allTasks: [],
           tasks: [],
           task: {
             content: ''
-          }
+          },
+          currentFilter: 'all'
         }
       },
       created: function () {
@@ -35,6 +37,7 @@ class Tasks {
             url: 'tasks.json',
             success: (response) => {
               _this.tasks = response;
+              _this.allTasks = _this.tasks;
             }
           })
         },
@@ -48,7 +51,7 @@ class Tasks {
               task: { content: event.target.value }
             },
             success: (response) => {
-              _this.task = []
+              _this.task = [];
               this.tasks.push(response);
             }
           });
@@ -77,6 +80,21 @@ class Tasks {
               _this.tasks.splice(index, 1);
             }
           });
+        },
+        all: function () {
+          this.tasks = this.allTasks;
+        },
+        activeTasks: function(){
+          this.tasks = this.allTasks.filter(function(task){
+            return task.completed === false
+          });
+          this.currentFilter = 'active';
+        },
+        completedTasks: function () {
+          this.tasks = this.allTasks.filter(function(task){
+            return task.completed === true
+          });
+          this.currentFilter = 'completed';
         }
       }
     })
