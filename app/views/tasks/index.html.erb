@@ -8,7 +8,7 @@
     <input type="checkbox" class="toggle-all">
 
     <ul class="todo-list">
-      <task-item v-for="(task, index) in tasks" :task="task" :key="task.id"
+      <task-item v-for="(task, index) in filteredTasks" :task="task" :key="task.id"
         @delete="deleteTask($event, index)"
         @update="updateTask($event, index)">
       </task-item>
@@ -17,8 +17,7 @@
 
   <footer class="footer">
     <span class="task-count">
-      <strong><%= @tasks.count %></strong>
-      items left
+      <strong>{{ remaining }}</strong> items left
     </span>
     <ul class="filters">
       <li><a href="#all" @click="all" :class="{ selected: currentFilter == 'all' }">All</a></li>
@@ -30,10 +29,10 @@
 
 <template id="task-item">
   <div>
-    <li class="task">
+    <li class="task" :class="{ completed: task.completed }">
       <div class="view">
         <input class="toggle" type="checkbox" v-model="task.completed" @change="updateTask">
-        <label><input type="text" v-model="task.content"></label>
+        <label><input type="text" v-model="task.content" @change="updateTask"></label>
         <button class="destroy" @click="removeTask"></button>
       </div>
     </li>

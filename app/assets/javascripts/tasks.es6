@@ -14,11 +14,27 @@ class Tasks {
       }
     });
 
+    // Filters
+    var filters = {
+      all: function (tasks) {
+        return tasks;
+      },
+      active: function (tasks) {
+        return tasks.filter(function (task) {
+          return !task.completed
+        });
+      },
+      completed: function (tasks) {
+        return tasks.filter(function (task) {
+          return task.completed
+        });
+      }
+    };
+
     new Vue({
       el: '#todos-app',
       data: function(){
         return {
-          allTasks: [],
           tasks: [],
           task: {
             content: ''
@@ -29,6 +45,16 @@ class Tasks {
       created: function () {
         this.getAllTasks();
       },
+      computed: {
+        filteredTasks: function () {
+          return filters[this.currentFilter](this.tasks);
+        },
+        remaining: function () {
+          return this.tasks.filter(function(task){
+            return task.completed === false
+          }).length;
+        }
+      },
       methods: {
         // All Tasks
         getAllTasks: function(){
@@ -37,7 +63,6 @@ class Tasks {
             url: 'tasks.json',
             success: (response) => {
               _this.tasks = response;
-              _this.allTasks = _this.tasks;
             }
           })
         },
@@ -52,7 +77,7 @@ class Tasks {
             },
             success: (response) => {
               _this.task = [];
-              this.tasks.push(response);
+              _this.tasks.push(response);
             }
           });
         },
@@ -82,18 +107,12 @@ class Tasks {
           });
         },
         all: function () {
-          this.tasks = this.allTasks;
+          this.currentFilter = 'all';
         },
         activeTasks: function(){
-          this.tasks = this.allTasks.filter(function(task){
-            return task.completed === false
-          });
           this.currentFilter = 'active';
         },
         completedTasks: function () {
-          this.tasks = this.allTasks.filter(function(task){
-            return task.completed === true
-          });
           this.currentFilter = 'completed';
         }
       }
