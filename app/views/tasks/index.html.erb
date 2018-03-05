@@ -9,8 +9,8 @@
 
     <ul class="todo-list">
       <task-item v-for="(task, index) in filteredTasks" :task="task" :key="task.id"
-        @delete="deleteTask($event, index)"
-        @update="updateTask($event, index)">
+        @delete="deleteTask($event)"
+        @update="updateTask($event)">
       </task-item>
     </ul>
   </section>

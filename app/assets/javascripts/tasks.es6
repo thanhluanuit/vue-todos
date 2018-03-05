@@ -96,8 +96,9 @@ class Tasks {
           });
         },
         // Delete a Task
-        deleteTask: function(task, index){
+        deleteTask: function(task){
           const _this = this;
+          const index = _this.tasks.indexOf(task);
           $.ajax({
             url: '/tasks/' + task.id + '.json',
             method: 'DELETE',
